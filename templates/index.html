@@ -1,0 +1,15 @@
+{% extends "base_template.html" %}
+
+{% block title %}Tutorial Flask: Miniblog{% endblock %}
+
+{% block content %}
+    {{ num_posts }} posts
+    <br>
+    {% print("La pagina es: ")%}
+    {{page}}
+    <ul>
+        {% for post in posts %}
+            <li><a href="{{ post.public_url() }}">{{ post.title }}</a></li>
+        {% endfor %}
+        </ul>
+{% endblock %}
