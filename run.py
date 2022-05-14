@@ -111,7 +111,7 @@ def pitagoras():
     hipotenusa = 0
     if request.method == 'POST':
         B = formula.cateto_menor_B
-        hipotenusa = int(B) + 1
+        hipotenusa = B + float(1)
         #C = request.form.get("cateto mayor")
 
 
