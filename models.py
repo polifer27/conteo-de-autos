@@ -1,9 +1,10 @@
 from flask import url_for
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+
+from run import db
 from slugify import slugify
 from sqlalchemy.exc import IntegrityError
-from run import db
 
 class User(db.Model, UserMixin):
 

@@ -1,0 +1,26 @@
+{% extends "base_template.html" %}
+
+{% block title %}Pitagoras{% endblock %}
+
+{% block content %}
+
+    <div>
+        <form action="" method="post" novalidate>
+        <br>
+        <div>
+            {{formula.cateto_menor_B.label}}
+            {{ formula.cateto_menor_B }}
+           
+        </div>   
+       
+        <div>
+            {% print('La hipotenusa es: ') %}
+            {{ hipotenusa }}
+        </div>
+        <div>
+            {{ formula.submit() }}
+        </div>
+        
+        </form> 
+    </div>
+{% endblock %}

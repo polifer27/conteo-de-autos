@@ -1,5 +1,6 @@
+from multiprocessing.sharedctypes import Value
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, TextAreaField, BooleanField
+from wtforms import StringField, SubmitField, PasswordField, TextAreaField, BooleanField, FloatField
 from wtforms.validators import DataRequired, Email, Length
 
 
@@ -20,3 +21,8 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Recuérdame')
     submit = SubmitField('Login')    
+
+class Formulas(FlaskForm):
+    cateto_menor_B = FloatField()
+    #cateto_mayor_C = IntegerField()
+    submit = SubmitField('Cargar datos')

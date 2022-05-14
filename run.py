@@ -1,27 +1,30 @@
+import math
 from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from flask import Flask, abort, render_template, request, redirect, url_for
 from werkzeug.urls import url_parse
 from flask_sqlalchemy import SQLAlchemy
-from forms import SignupForm, PostForm, LoginForm
-from models import User, Post
+from forms import SignupForm, PostForm, LoginForm, Formulas
+
 
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b23a5d1616bf319bc298105da20fe'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:1234@localhost:5432/miniblog'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:123@localhost:5432/miniblog'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 db = SQLAlchemy(app)
-#from models import User
+
+from models import User, Post
 
 #posts = []
 
 @app.route('/')
 def index():
     posts = Post.get_all()
-    return render_template("index.html", posts=posts)
+    page = request.args.get('page', 1)
+    return render_template("index.html", posts=posts, page=page)
 
 @app.route("/p/<string:slug>/")
 def show_post(slug):
@@ -100,3 +103,17 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/formula', methods=['GET', 'POST'])
+def pitagoras():  
+    formula = Formulas()
+    B = 0
+    hipotenusa = 0
+    if request.method == 'POST':
+        B = formula.cateto_menor_B
+        hipotenusa = int(B) + 1
+        #C = request.form.get("cateto mayor")
+
+
+    return render_template('formula.html', formula=formula, hipotenusa=hipotenusa)  
+      
